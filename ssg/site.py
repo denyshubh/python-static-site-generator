@@ -8,7 +8,7 @@ Methods:
 from pathlib import (
     Path,
     PurePath,
-    
+    PurePosixPath
 )
 
 class Site:
@@ -21,7 +21,8 @@ class Site:
     def create_dir(self, path):
         '''
         '''
-        directory = f'{self.dest}/{path.relative_to(self.source)}'
+        p = PurePosixPath(path)
+        directory = f'{self.dest}/{p.relative_to(self.source)}'
         Path.mkdir(directory, parents=True, exist_ok=True)
     
     def build(self):
